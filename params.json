@@ -1,0 +1,1 @@
+{"name":"Virtual DevOps","tagline":"Config kickstarter for Centos VMs","body":"DevOps Kickstarter\r\n====================\r\nTo get rockin':\r\n\r\n```bash\r\ncurl -sS https://raw.githubusercontent.com/kenaniah/virtual-devops/master/perform-setup.sh | bash\r\n```\r\n","google":"","note":"Don't delete this file! It's used internally to help with page regeneration."}
