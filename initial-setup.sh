@@ -1,10 +1,11 @@
 #!/bin/bash
 
-PUPPET_IP=192.241.234.84
-
 # This is the initial setup script that should be executed when the server
 # is first provisioned. It will proceed to update pacakges and install the 
 # software config stack.
+
+SCRIPT_PATH=$(dirname `which $0`)
+. $SCRIPT_PATH/config.sh
 
 # Install repositories
 rpm -ihv http://mirror.steadfast.net/epel/6/x86_64/epel-release-6-8.noarch.rpm
