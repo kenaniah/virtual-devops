@@ -11,3 +11,6 @@ ifconfig | grep -q "$PUPPET_IP" || exit 1
 
 # Install the puppet server
 yum install puppet-server -y
+
+# Start the puppetmaster service
+puppet resource service puppetmaster ensure=running enable=true

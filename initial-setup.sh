@@ -22,3 +22,9 @@ yum update -y
 
 # Set up the puppet master (if our IPs match)
 . $SCRIPT_PATH/setup-puppetmaster.sh
+
+# Perform the setup
+puppet agent --onetime --no-daemonize -v
+
+# Start the puppet client service
+puppet resource service puppet ensure=running enable=true
