@@ -5,3 +5,4 @@
 # software config stack.
 
 yum update -y
+yum install vim -y
