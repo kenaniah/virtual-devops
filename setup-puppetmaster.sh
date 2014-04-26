@@ -10,13 +10,13 @@ SCRIPT_PATH=$(dirname `which $0`)
 ifconfig | grep -q "$PUPPET_IP" || exit 1
 
 # Install the puppet server
-yum install puppet-server -y
+test -d /etc/puppet/manifests || yum install puppet-server -y
 
 # Set up the autosign file
 test -f /etc/puppet/autosign.conf || echo "$PUPPET_AUTOSIGN" > /etc/puppet/autosign.conf
 
-# Symlink to the manifest
-rmdir /etc/puppet/manifests && ln -s $SCRIPT_PATH/puppet-manifests /etc/puppet/manifests
+# Update the manifest
+rsync -rav /root/digital-ocean-devops/puppet-manifests/ /etc/puppet/manifests
 
 # Start the puppetmaster service
 puppet resource service puppetmaster ensure=running enable=true
