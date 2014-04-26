@@ -14,7 +14,7 @@ rpm -ihv http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
 yum install vim wget man htop -y
 
 # Point to the puppet host (if it doesn't already exist)
-grep -q "puppet" /etc/hosts && echo "$PUPPET_IP puppet" >> /etc/hosts
+grep -q "puppet" /etc/hosts || echo "$PUPPET_IP puppet" >> /etc/hosts
 
 # Install software config
 yum install puppet -y
