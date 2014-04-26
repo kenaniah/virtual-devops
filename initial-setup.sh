@@ -7,6 +7,9 @@
 SCRIPT_PATH=$(dirname `which $0`)
 . $SCRIPT_PATH/config.sh
 
+# Set the time zone
+rm /etc/localtime -f && ln -s /usr/share/zoneinfo/$TZ
+
 # Install repositories
 rpm -ihv http://mirror.steadfast.net/epel/6/x86_64/epel-release-6-8.noarch.rpm
 rpm -ihv http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
