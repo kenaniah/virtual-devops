@@ -26,6 +26,9 @@ yum update -y
 # Set up the puppet master (if our IPs match)
 . $SCRIPT_PATH/setup-puppetmaster.sh
 
+# Copy over the puppet config file
+rsync -v $SCRIPT_PATH/files/puppet.conf /etc/puppet/puppet.conf
+
 # Perform the setup
 puppet agent --onetime --no-daemonize -v
 
