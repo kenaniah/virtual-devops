@@ -8,7 +8,7 @@ SCRIPT_PATH=$(dirname `which $0`)
 . $SCRIPT_PATH/config.sh
 
 # Set the time zone
-rm /etc/localtime -f && ln -s /usr/share/zoneinfo/$TZ
+rm /etc/localtime -f && ln -s /usr/share/zoneinfo/$TZ /etc/localtime
 
 # Install repositories
 rpm -ihv http://mirror.steadfast.net/epel/6/x86_64/epel-release-6-8.noarch.rpm
