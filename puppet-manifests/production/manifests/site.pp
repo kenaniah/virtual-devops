@@ -1,5 +1,5 @@
 node 'puppet' {
 	class {'apache':
-		purge_configs: false 
+		purge_configs => false 
 	}
 }
