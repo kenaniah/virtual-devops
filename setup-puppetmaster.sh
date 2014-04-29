@@ -16,7 +16,7 @@ if [ ! -d /etc/puppet/manifests ]; then
 	yum install puppet-server httpd mod_passenger mod_ssl -y
 	
 	# Initialize certs and stuff
-	service puppetmaster start
+	puppet resource service puppetmaster ensure=running enable=true
 	
 	# Initialize paths
 	mkdir -p /usr/share/puppet/rack/puppetmasterd/public
