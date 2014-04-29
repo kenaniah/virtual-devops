@@ -1,2 +1,0 @@
- notify {"Puppet manifest installed.":}
- 
