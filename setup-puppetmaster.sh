@@ -30,17 +30,25 @@ if [ ! -d /etc/puppet/manifests ]; then
 	cp -f $SCRIPT_PATH/files/dashboard-database.yml /usr/share/puppet-dashboard/config/database.yml
 	
 	# Update the DB password
-	sed -i "/  password:/c\  password:$PUPPET_DASHBOARD_MYSQL_PASSWORD/" /usr/share/puppet-dashboard/config/database.yml
+	sed -i "/  password:/c\  password: $PUPPET_DASHBOARD_MYSQL_PASSWORD/" /usr/share/puppet-dashboard/config/database.yml
 	
 	# Enforce permissions
 	chown -R puppet:puppet /usr/share/puppet
 	chown -R puppet-dashboard:puppet-dashboard /usr/share/puppet-dashboard
 	
+	# Install additional puppet modules
+	puppet module install puppetlabs-inifile
+	
 	# Set up MySQL
+	puppet resource ini_setting "mysqld max_packet_size" ensure=present path=/etc/my.cnf section=mysqld setting=max_packet_size value=32M
 	puppet resource service mysqld ensure=running enable=true
 	echo "CREATE DATABASE dashboard_production CHARACTER SET utf8;" | mysql
 	echo "CREATE USER 'dashboard'@'localhost' IDENTIFIED BY '$PUPPET_DASHBOARD_MYSQL_PASSWORD';" | mysql
-	echo "GRANT ALL PRIVILEGES ON dashboard_production.* TO 'dashboard'@'localhost';"
+	echo "GRANT ALL PRIVILEGES ON dashboard_production TO 'dashboard'@'localhost'; FLUSH PRIVILEGES;" | mysql
+	
+	# Set up the DB
+	rake RAILS_ENV=production gems:refresh_specs -f /usr/share/puppet-dashboard/Rakefile
+	rake RAILS_ENV=production db:migrate -f /usr/share/puppet-dashboard/Rakefile
 	
 fi
 
