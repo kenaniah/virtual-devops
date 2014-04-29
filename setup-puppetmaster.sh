@@ -13,7 +13,7 @@ ifconfig | grep -q "$PUPPET_IP" || exit 1
 if [ ! -d /etc/puppet/manifests ]; then
 	
 	# Install packages
-	yum install puppet-server httpd mod_passenger mod_ssl -y
+	yum install puppet-server httpd mod_passenger mod_ssl puppet-dashboard -y
 	
 	# Initialize certs and stuff
 	puppet resource service puppetmaster ensure=running enable=true
@@ -26,9 +26,15 @@ if [ ! -d /etc/puppet/manifests ]; then
 	# Copy configs
 	cp /usr/share/puppet/ext/rack/config.ru /usr/share/puppet/rack/puppetmasterd/
 	cp $SCRIPT_PATH/files/puppetmaster-vhost.conf /etc/httpd/conf.d/puppetmaster.conf
+	cp -f $SCRIPT_PATH/files/dashboard-settings.yml /usr/share/puppet-dashboard/config/settings.yml
+	cp -f $SCRIPT_PATH/files/dashboard-database.yml /usr/share/puppet-dashboard/config/database.yml
+	
+	# Update the DB password
+	sed -i "/  password:/c\  password:$PUPPET_DASHBOARD_MYSQL_PASSWORD/" /usr/share/puppet-dashboard/config/database.yml
 	
 	# Enforce permissions
 	chown -R puppet:puppet /usr/share/puppet
+	chown -R puppet-dashboard:puppet-dashboard /usr/share/puppet-dashboard
 			
 fi
 
