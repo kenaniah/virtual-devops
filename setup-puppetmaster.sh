@@ -18,6 +18,8 @@ if [ ! -d /etc/puppet/manifests ]; then
 	chown -R puppet:puppet /usr/share/puppet/rack
 	mkdir /var/run/passenger
 	cp $SCRIPT_PATH/files/puppetmaster-vhost.conf /etc/httpd/conf.d/puppetmaster.conf
+	chkconfig httpd on
+	service httpd restart
 fi
 
 # Set up the autosign file
@@ -29,7 +31,7 @@ rsync -rav $SCRIPT_PATH/puppet-manifests/ /etc/puppet/environments
 # Update puppet modules
 # puppet module install puppetlabs-apache
 
-# Start the puppetmaster service
-puppet resource service puppetmaster ensure=running enable=true
-
-service puppetmaster restart
+# Set up the service
+puppet resource service puppetmaster ensure=stopped enable=false
+puppet resource service httpd ensure=running enable=true
+service httpd graceful
