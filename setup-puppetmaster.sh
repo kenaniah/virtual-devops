@@ -10,7 +10,15 @@ SCRIPT_PATH=$(dirname `which $0`)
 ifconfig | grep -q "$PUPPET_IP" || exit 1
 
 # Install the puppet server
-test -d /etc/puppet/manifests || yum install puppet-server -y
+if [ ! -d /etc/puppet/manifests ]; then
+	yum install puppet-server httpd mod_passenger mod_ssl -y
+	mkdir -p /usr/share/puppet/rack/puppetmasterd/public
+	mkdir -p /usr/share/puppet/rack/puppetmasterd/tmp
+	cp /usr/share/puppet/ext/rack/config.ru /usr/share/puppet/rack/puppetmasterd/
+	chown -R puppet:puppet /usr/share/puppet/rack
+	mkdir /var/run/passenger
+	cp $SCRIPT_PATH/files/puppetmaster-vhost.conf /etc/httpd/conf.d/puppetmaster.conf
+fi
 
 # Set up the autosign file
 test -f /etc/puppet/autosign.conf || echo "$PUPPET_AUTOSIGN" > /etc/puppet/autosign.conf
