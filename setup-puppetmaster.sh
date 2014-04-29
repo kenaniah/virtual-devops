@@ -26,6 +26,7 @@ if [ ! -d /etc/puppet/manifests ]; then
 	# Copy configs
 	cp /usr/share/puppet/ext/rack/config.ru /usr/share/puppet/rack/puppetmasterd/
 	cp $SCRIPT_PATH/files/puppetmaster-vhost.conf /etc/httpd/conf.d/puppetmaster.conf
+	cp $SCRIPT_PATH/files/dashboard-vhost.conf /etc/httpd/conf.d/dashboard.conf
 	cp -f $SCRIPT_PATH/files/dashboard-settings.yml /usr/share/puppet-dashboard/config/settings.yml
 	cp -f $SCRIPT_PATH/files/dashboard-database.yml /usr/share/puppet-dashboard/config/database.yml
 	
@@ -46,10 +47,13 @@ if [ ! -d /etc/puppet/manifests ]; then
 	echo "CREATE USER 'dashboard'@'localhost' IDENTIFIED BY '$PUPPET_DASHBOARD_MYSQL_PASSWORD';" | mysql
 	echo "GRANT ALL PRIVILEGES ON dashboard_production.* TO 'dashboard'@'localhost'; FLUSH PRIVILEGES;" | mysql
 	
-	# Set up the DB
+	# Perform rake tasks
 	cd /usr/share/puppet-dashboard
-	rake RAILS_ENV=production gems:refresh_specs
-	rake RAILS_ENV=production db:migrate
+	sudo -u puppet-dashboard rake RAILS_ENV=production gems:refresh_specs
+	sudo -u puppet-dashboard rake RAILS_ENV=production db:migrate
+	sudo -u puppet-dashboard rake RAILS_ENV=production cert:create_key_pair
+	sudo -u puppet-dashboard rake RAILS_ENV=production cert:request
+	sudo -u puppet-dashboard rake RAILS_ENV=production cert:retrieve
 	cd -
 	
 fi
