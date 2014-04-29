@@ -27,10 +27,6 @@ if [ ! -d /etc/puppet/manifests ]; then
 	
 	# Initialize certs
 	puppet cert generate puppet
-	cp /var/lib/puppet/ssl/certs/puppet.pem /etc/pki/tls/certs/puppetmaster.pem
-	cp /var/lib/puppet/ssl/private_keys/puppet.pem /etc/pki/tls/private/puppetmaster.key
-	chmod 600 /etc/pki/tls/certs/puppetmaster.pem /etc/pki/tls/private/puppetmaster.key
-	puppet cert clean puppet
 		
 fi
 
