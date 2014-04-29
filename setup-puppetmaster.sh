@@ -20,3 +20,5 @@ rsync -rav $SCRIPT_PATH/puppet-manifests/ /etc/puppet/environments
 
 # Start the puppetmaster service
 puppet resource service puppetmaster ensure=running enable=true
+
+service puppetmaster restart
