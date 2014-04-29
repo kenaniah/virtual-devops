@@ -15,6 +15,9 @@ if [ ! -d /etc/puppet/manifests ]; then
 	# Install packages (dashboard requires MySQL for its backend)
 	yum install puppet-server httpd mod_passenger mod_ssl puppet-dashboard mysql mysql-server -y
 	
+	# Set up the autosign file
+	test -f /etc/puppet/autosign.conf || echo "$PUPPET_AUTOSIGN" > /etc/puppet/autosign.conf
+	
 	# Initialize certs and stuff
 	puppet resource service puppetmaster ensure=running enable=true
 	
@@ -29,9 +32,6 @@ if [ ! -d /etc/puppet/manifests ]; then
 	cp $SCRIPT_PATH/files/dashboard-vhost.conf /etc/httpd/conf.d/dashboard.conf
 	cp -f $SCRIPT_PATH/files/dashboard-settings.yml /usr/share/puppet-dashboard/config/settings.yml
 	cp -f $SCRIPT_PATH/files/dashboard-database.yml /usr/share/puppet-dashboard/config/database.yml
-	
-	# Set up the autosign file
-	test -f /etc/puppet/autosign.conf || echo "$PUPPET_AUTOSIGN" > /etc/puppet/autosign.conf
 	
 	# Update the DB password
 	sed -i "/  password:/c\  password: $PUPPET_DASHBOARD_MYSQL_PASSWORD" /usr/share/puppet-dashboard/config/database.yml
