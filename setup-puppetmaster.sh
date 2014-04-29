@@ -15,6 +15,9 @@ if [ ! -d /etc/puppet/manifests ]; then
 	# Install packages
 	yum install puppet-server httpd mod_passenger mod_ssl -y
 	
+	# Initialize certs and stuff
+	service puppetmaster start
+	
 	# Initialize paths
 	mkdir -p /usr/share/puppet/rack/puppetmasterd/public
 	mkdir -p /usr/share/puppet/rack/puppetmasterd/tmp
@@ -24,10 +27,7 @@ if [ ! -d /etc/puppet/manifests ]; then
 	# Copy configs
 	cp /usr/share/puppet/ext/rack/config.ru /usr/share/puppet/rack/puppetmasterd/
 	cp $SCRIPT_PATH/files/puppetmaster-vhost.conf /etc/httpd/conf.d/puppetmaster.conf
-	
-	# Initialize certs
-	# puppet cert generate puppet
-		
+			
 fi
 
 # Set up the autosign file
@@ -36,10 +36,7 @@ test -f /etc/puppet/autosign.conf || echo "$PUPPET_AUTOSIGN" > /etc/puppet/autos
 # Update the manifest
 rsync -rav $SCRIPT_PATH/puppet-manifests/ /etc/puppet/environments
 
-# Update puppet modules
-# puppet module install puppetlabs-apache
-
 # Set up the service
 puppet resource service puppetmaster ensure=stopped enable=false
 puppet resource service httpd ensure=running enable=true
-service httpd graceful
+service httpd restart
