@@ -26,7 +26,7 @@ if [ ! -d /etc/puppet/manifests ]; then
 	cp $SCRIPT_PATH/files/puppetmaster-vhost.conf /etc/httpd/conf.d/puppetmaster.conf
 	
 	# Initialize certs
-	puppet cert generate puppet
+	# puppet cert generate puppet
 		
 fi
 
