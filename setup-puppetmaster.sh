@@ -12,8 +12,8 @@ ifconfig | grep -q "$PUPPET_IP" || exit 1
 # Install the puppet server
 if [ ! -d /etc/puppet/manifests ]; then
 	
-	# Install packages
-	yum install puppet-server httpd mod_passenger mod_ssl puppet-dashboard -y
+	# Install packages (dashboard requires MySQL for its backend)
+	yum install puppet-server httpd mod_passenger mod_ssl puppet-dashboard mysql mysql-server -y
 	
 	# Initialize certs and stuff
 	puppet resource service puppetmaster ensure=running enable=true
@@ -35,7 +35,13 @@ if [ ! -d /etc/puppet/manifests ]; then
 	# Enforce permissions
 	chown -R puppet:puppet /usr/share/puppet
 	chown -R puppet-dashboard:puppet-dashboard /usr/share/puppet-dashboard
-			
+	
+	# Set up MySQL
+	puppet resource service mysqld ensure=running enable=true
+	echo "CREATE DATABASE dashboard_production CHARACTER SET utf8;" | mysql
+	echo "CREATE USER 'dashboard'@'localhost' IDENTIFIED BY '$PUPPET_DASHBOARD_MYSQL_PASSWORD';" | mysql
+	echo "GRANT ALL PRIVILEGES ON dashboard_production.* TO 'dashboard'@'localhost';"
+	
 fi
 
 # Set up the autosign file
