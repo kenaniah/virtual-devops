@@ -11,15 +11,27 @@ ifconfig | grep -q "$PUPPET_IP" || exit 1
 
 # Install the puppet server
 if [ ! -d /etc/puppet/manifests ]; then
+	
+	# Install packages
 	yum install puppet-server httpd mod_passenger mod_ssl -y
+	
+	# Initialize paths
 	mkdir -p /usr/share/puppet/rack/puppetmasterd/public
 	mkdir -p /usr/share/puppet/rack/puppetmasterd/tmp
-	cp /usr/share/puppet/ext/rack/config.ru /usr/share/puppet/rack/puppetmasterd/
 	chown -R puppet:puppet /usr/share/puppet/rack
 	mkdir /var/run/passenger
+	
+	# Copy configs
+	cp /usr/share/puppet/ext/rack/config.ru /usr/share/puppet/rack/puppetmasterd/
 	cp $SCRIPT_PATH/files/puppetmaster-vhost.conf /etc/httpd/conf.d/puppetmaster.conf
-	chkconfig httpd on
-	service httpd restart
+	
+	# Initialize certs
+	puppet cert generate puppet
+	cp /var/lib/puppet/ssl/certs/puppet.pem /etc/pki/tls/certs/puppetmaster.pem
+	cp /var/lib/puppet/ssl/private_keys/puppet.pem /etc/pki/tls/private/puppetmaster.key
+	chmod 600 /etc/pki/tls/certs/puppetmaster.pem /etc/pki/tls/private/puppetmaster.key
+	puppet cert clean puppet
+		
 fi
 
 # Set up the autosign file
