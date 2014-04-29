@@ -19,7 +19,7 @@ test -f /etc/puppet/autosign.conf || echo "$PUPPET_AUTOSIGN" > /etc/puppet/autos
 rsync -rav $SCRIPT_PATH/puppet-manifests/ /etc/puppet/environments
 
 # Update puppet modules
-puppet module install puppetlabs-apache
+# puppet module install puppetlabs-apache
 
 # Start the puppetmaster service
 puppet resource service puppetmaster ensure=running enable=true
