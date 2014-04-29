@@ -40,7 +40,7 @@ if [ ! -d /etc/puppet/manifests ]; then
 	puppet module install puppetlabs-inifile
 	
 	# Set up MySQL
-	puppet resource ini_setting "mysqld max_packet_size" ensure=present path=/etc/my.cnf section=mysqld setting=max_packet_size value=32M
+	puppet resource ini_setting "mysqld max_allowed_packet" ensure=present path=/etc/my.cnf section=mysqld setting=max_allowed_packet value=32M
 	puppet resource service mysqld ensure=running enable=true
 	echo "CREATE DATABASE dashboard_production CHARACTER SET utf8;" | mysql
 	echo "CREATE USER 'dashboard'@'localhost' IDENTIFIED BY '$PUPPET_DASHBOARD_MYSQL_PASSWORD';" | mysql
