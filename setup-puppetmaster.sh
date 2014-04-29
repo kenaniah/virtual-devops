@@ -30,6 +30,9 @@ if [ ! -d /etc/puppet/manifests ]; then
 	cp -f $SCRIPT_PATH/files/dashboard-settings.yml /usr/share/puppet-dashboard/config/settings.yml
 	cp -f $SCRIPT_PATH/files/dashboard-database.yml /usr/share/puppet-dashboard/config/database.yml
 	
+	# Set up the autosign file
+	test -f /etc/puppet/autosign.conf || echo "$PUPPET_AUTOSIGN" > /etc/puppet/autosign.conf
+	
 	# Update the DB password
 	sed -i "/  password:/c\  password: $PUPPET_DASHBOARD_MYSQL_PASSWORD" /usr/share/puppet-dashboard/config/database.yml
 	
@@ -57,9 +60,6 @@ if [ ! -d /etc/puppet/manifests ]; then
 	cd -
 	
 fi
-
-# Set up the autosign file
-test -f /etc/puppet/autosign.conf || echo "$PUPPET_AUTOSIGN" > /etc/puppet/autosign.conf
 
 # Update the manifest
 rsync -rav $SCRIPT_PATH/puppet-manifests/ /etc/puppet/environments
