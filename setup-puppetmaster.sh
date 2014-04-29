@@ -21,12 +21,14 @@ if [ ! -d /etc/puppet/manifests ]; then
 	# Initialize paths
 	mkdir -p /usr/share/puppet/rack/puppetmasterd/public
 	mkdir -p /usr/share/puppet/rack/puppetmasterd/tmp
-	chown -R puppet:puppet /usr/share/puppet
 	mkdir /var/run/passenger
 	
 	# Copy configs
 	cp /usr/share/puppet/ext/rack/config.ru /usr/share/puppet/rack/puppetmasterd/
 	cp $SCRIPT_PATH/files/puppetmaster-vhost.conf /etc/httpd/conf.d/puppetmaster.conf
+	
+	# Enforce permissions
+	chown -R puppet:puppet /usr/share/puppet
 			
 fi
 
