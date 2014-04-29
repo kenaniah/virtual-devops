@@ -1,1 +1,5 @@
-notify {"Puppet manifest installed.":}
+node 'puppet' {
+	class {'apache':
+		purge_configs: false 
+	}
+}
