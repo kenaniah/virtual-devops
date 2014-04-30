@@ -26,6 +26,7 @@ yum update -y
 # Copy over the puppet config files
 rsync -v $SCRIPT_PATH/files/auth.conf /etc/puppet/auth.conf
 rsync -v $SCRIPT_PATH/files/puppet.conf /etc/puppet/puppet.conf
+rsync -v $SCRIPT_PATH/files/https.rb /usr/lib/ruby/site_ruby/1.8/puppet/reports/https.rb
 
 # Set up the puppet master (if our IPs match)
 . $SCRIPT_PATH/setup-puppetmaster.sh
