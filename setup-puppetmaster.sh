@@ -68,6 +68,7 @@ rsync -rav $SCRIPT_PATH/puppet-manifests/ /etc/puppet/environments
 puppet resource service puppetmaster ensure=stopped enable=false
 puppet resource service httpd ensure=running enable=true
 service httpd restart
+puppet resource service puppet-dashboard-workers ensure=running enable=true
 
 # Update ourself
 puppet module install puppetlabs-inifile
