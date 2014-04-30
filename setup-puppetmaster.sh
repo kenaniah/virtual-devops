@@ -33,6 +33,10 @@ if [ ! -d /etc/puppet/manifests ]; then
 	cp -f $SCRIPT_PATH/files/dashboard-settings.yml /usr/share/puppet-dashboard/config/settings.yml
 	cp -f $SCRIPT_PATH/files/dashboard-database.yml /usr/share/puppet-dashboard/config/database.yml
 	
+	# Set up reporting
+	mkdir -p $(puppet master --configprint libdir)/puppet/reports
+	cp /usr/share/puppet-dashboard/ext/puppet/puppet_dashboard.rb $(puppet master --configprint libdir)/puppet/reports/
+	
 	# Update the DB password
 	sed -i "/  password:/c\  password: $PUPPET_DASHBOARD_MYSQL_PASSWORD" /usr/share/puppet-dashboard/config/database.yml
 	
