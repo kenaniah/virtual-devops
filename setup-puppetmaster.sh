@@ -40,9 +40,6 @@ if [ ! -d /etc/puppet/manifests ]; then
 	chown -R puppet:puppet /usr/share/puppet
 	chown -R puppet-dashboard:puppet-dashboard /usr/share/puppet-dashboard
 	
-	# Install additional puppet modules
-	puppet module install puppetlabs-inifile
-	
 	# Set up MySQL
 	puppet resource service mysqld ensure=running enable=true
 	echo "CREATE DATABASE dashboard_production CHARACTER SET utf8;" | mysql
@@ -69,6 +66,6 @@ puppet resource service httpd ensure=running enable=true
 service httpd restart
 
 # Update ourself
-puppet agent -v --onetime --no-daemonize
+puppet module install puppetlabs-inifile
 puppet resource ini_setting "mysqld max_allowed_packet" ensure=present path=/etc/my.cnf section=mysqld setting=max_allowed_packet value=32M
 service mysqld restart
