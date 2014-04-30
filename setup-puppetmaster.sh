@@ -42,6 +42,7 @@ if [ ! -d /etc/puppet/manifests ]; then
 	
 	# Install additional puppet modules
 	puppet module install puppetlabs-inifile
+	puppet agent --onetime --no-daemonize -v
 	
 	# Set up MySQL
 	puppet resource ini_setting "mysqld max_allowed_packet" ensure=present path=/etc/my.cnf section=mysqld setting=max_allowed_packet value=32M
