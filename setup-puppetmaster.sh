@@ -42,10 +42,8 @@ if [ ! -d /etc/puppet/manifests ]; then
 	
 	# Install additional puppet modules
 	puppet module install puppetlabs-inifile
-	puppet agent --onetime --no-daemonize -v
 	
 	# Set up MySQL
-	puppet resource ini_setting "mysqld max_allowed_packet" ensure=present path=/etc/my.cnf section=mysqld setting=max_allowed_packet value=32M
 	puppet resource service mysqld ensure=running enable=true
 	echo "CREATE DATABASE dashboard_production CHARACTER SET utf8;" | mysql
 	echo "CREATE USER 'dashboard'@'localhost' IDENTIFIED BY '$PUPPET_DASHBOARD_MYSQL_PASSWORD';" | mysql
@@ -69,3 +67,8 @@ rsync -rav $SCRIPT_PATH/puppet-manifests/ /etc/puppet/environments
 puppet resource service puppetmaster ensure=stopped enable=false
 puppet resource service httpd ensure=running enable=true
 service httpd restart
+
+# Update ourself
+puppet agent -v --onetime --no-daemonize
+puppet resource ini_setting "mysqld max_allowed_packet" ensure=present path=/etc/my.cnf section=mysqld setting=max_allowed_packet value=32M
+service mysqld restart
