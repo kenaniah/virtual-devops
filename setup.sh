@@ -23,11 +23,12 @@ grep -q "puppet" /etc/hosts || echo "$PUPPET_IP puppet" >> /etc/hosts
 # Perform a full system update
 yum update -y
 
+# Copy over the puppet config files
+rsync -v $SCRIPT_PATH/files/auth.conf /etc/puppet/auth.conf
+rsync -v $SCRIPT_PATH/files/puppet.conf /etc/puppet/puppet.conf
+
 # Set up the puppet master (if our IPs match)
 . $SCRIPT_PATH/setup-puppetmaster.sh
-
-# Copy over the puppet config file
-rsync -v $SCRIPT_PATH/files/puppet.conf /etc/puppet/puppet.conf
 
 # Perform the setup
 puppet agent --onetime --no-daemonize -v
