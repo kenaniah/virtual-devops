@@ -7,6 +7,10 @@
 SCRIPT_PATH=$(dirname `which $0`)
 . $SCRIPT_PATH/config.sh
 
+# Add cronic
+cp $SCRIPT_PATH/files/cronic /usr/bin/cronic
+chmod 777 /usr/bin/cronic
+
 # Set the time zone
 rm /etc/localtime -f && ln -s /usr/share/zoneinfo/$TZ /etc/localtime
 
