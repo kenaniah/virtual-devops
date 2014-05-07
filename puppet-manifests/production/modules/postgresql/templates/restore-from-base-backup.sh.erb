@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# This file is being maintained by Puppet.
+# DO NOT EDIT
+
+VERSION=<%= major %>.<%= minor %>
+
+# Sanity check
+if [ ! -f /var/lib/pgsql/pg_base_backup.tar.gz ]
+then
+        echo "/var/lib/pgsql/pg_base_backup.tar.gz could not be found!"
+        exit 1
+fi
+
+cd /var/lib/pgsql
+
+# Stop postgres
+echo "Stopping postgres server..."
+service postgresql-$VERSION stop
+
+# Move the data dir
+echo "Moving the data directory..."
+chown postgres:postgres pg_base_backup.tar.gz
+mv $VERSION/data $VERSION/data.orig
+su - postgres -c "mkdir $VERSION/data && chmod 700 $VERSION/data"
+
+# Unpack the backup
+echo "Unpacking the backup..."
+su - postgres -c "tar zxf pg_base_backup.tar.gz --directory=$VERSION/data"
+
+if [ -f $VERSION/data.orig/recovery.conf ]
+then
+	echo "Copying the recovery config file..."
+	su - postgres -c "cp $VERSION/data.orig/recovery.conf $VERSION/data/"
+else
+	echo "No recovery config file found."
+fi
+
+# Restart the server
+echo "Starting postgres server..."
+service postgresql-$VERSION start
+
+# Perform cleanup
+rm $VERSION/data.orig -rf

@@ -1,0 +1,7 @@
+# This file is managed by puppet. DO NOT EDIT.
+
+PGPORT=54<%= major %><%= minor %>
+export PGPORT
+
+PATH=$PATH:/usr/pgsql-<%= major %>.<%= minor %>/bin
+export PATH
