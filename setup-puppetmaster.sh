@@ -67,8 +67,7 @@ if [ ! -d /etc/puppet/manifests ]; then
 fi
 
 # Symlink the puppet manifests
-rmdir /etc/puppet/manifests
-ln -s /opt/virtual-devops/puppet-manifests /etc/puppet/manifests
+ln -s /opt/virtual-devops/puppet-manifests /etc/puppet/environments
 
 # Set up the service
 puppet resource service puppetmaster ensure=stopped enable=false
