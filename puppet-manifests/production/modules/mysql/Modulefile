@@ -1,0 +1,5 @@
+name 'virtualdevops-mysql'
+version '1.0.0'
+author 'Kenaniah Cerny'
+license 'GPL'
+summary 'Installs and configures MySQL and shell scripts'
