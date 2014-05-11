@@ -1,10 +1,5 @@
 class php {
 
-	Package {
-		ensure => installed,
-		require => Ini_setting["remi php 5.5"]
-	}
-
 	exec { "remi yum repo":
 		command => "rpm -ivh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm",
 		creates => "/etc/yum.repos.d/remi.repo"
@@ -64,6 +59,7 @@ class php {
 		"php-xml",
 		"php-zts"
 	  ]: 
+	  	ensure => installed,
 	  	require => [ Ini_setting["remi base"], Ini_setting["remi php 5.5"] ]
 	}
 	
