@@ -9,6 +9,13 @@ class postgresql($major = '9', $minor = '3') {
 	$postgres_contrib = "postgresql${major}${minor}-contrib"
 	$package = "pgdg-${os}${major}${minor}"
 	
+	# Ini file defaults
+	Ini_file {
+		ensure => present,
+		path => "/var/lib/pgsql/${major}.${minor}/data/postgresql.conf",
+		section => ""
+	}
+	
 	exec {
 		"install-pgdg-${major}${minor}":
 			command => "wget -nd -r -l 1 http://yum.postgresql.org/${major}.${minor}/${family}/rhel-${operatingsystemmajrelease}-${hardwareisa}/ -A 'pgdg*${os}*' && ls -F pgdg-${os}* | head --lines=-1 | xargs rm ; rpm -ivh pgdg-${os}* && rm -f pgdg-${os}*;",
@@ -132,6 +139,26 @@ class postgresql($major = '9', $minor = '3') {
 		group => "postgres",
 		mode => 1700,
 		require => [ Package[$postgres_server], Exec["init-db-${major}.${minor}"] ]
+	}
+	
+	ini_file { "postgresql ini listen_addresses":
+		setting => "listen_addresses",
+		value => "*"
+	}
+	
+	ini_file { "postgresql ini port":
+		setting => "port",
+		value => "54${major}${minor}"
+	}
+	
+	ini_file { "postgresql ini listen_addresses":
+		setting => "listen_addresses",
+		value => "*"
+	}
+	
+	ini_file { "postgresql ini shared_buffers":
+		setting => "shared_buffers",
+		value => inline_template("<%= (${memorysize_mb} * 0.3).floor %>MB")
 	}
 	
 	cron { "postgresql backup":
