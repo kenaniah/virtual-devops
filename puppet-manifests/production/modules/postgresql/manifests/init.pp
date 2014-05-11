@@ -13,7 +13,8 @@ class postgresql($major = '9', $minor = '3') {
 	Ini_file {
 		ensure => present,
 		path => "/var/lib/pgsql/${major}.${minor}/data/postgresql.conf",
-		section => ""
+		section => "",
+		require => [ Package[$postgres_server], Exec["init-db-${major}.${minor}"] ]
 	}
 	
 	exec {
