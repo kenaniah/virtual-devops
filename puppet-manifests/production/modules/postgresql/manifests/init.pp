@@ -157,6 +157,86 @@ class postgresql($major = '9', $minor = '3') {
 		value => inline_template("<%= (${memorysize_mb} * 0.3).floor %>MB")
 	}
 	
+	ini_setting { "postgresql ini work_mem":
+		setting => "work_mem",
+		value => "16MB"
+	}
+	
+	ini_setting { "postgresql ini maintenance_work_mem":
+		setting => "maintenance_work_mem",
+		value => "128MB"
+	}
+	
+	ini_setting { "postgresql ini effective_cache_size":
+		setting => "effective_cache_size",
+		value => inline_template("<%= (${memorysize_mb} * 0.6).floor %>MB")
+	}
+	
+	ini_setting { "postgresql ini default_statistics_target":
+		setting => "default_statistics_target",
+		value => 1000
+	}
+	
+	ini_setting { "postgresql ini checkpoint_segments":
+		setting => "checkpoint_segments",
+		value => 64
+	}
+	
+	ini_setting { "postgresql ini checkpoint_completion_target":
+		setting => "checkpoint_completion_target",
+		value => 0.75
+	}
+	
+	ini_setting { "postgresql ini shared_buffers":
+		setting => "shared_buffers",
+		value => inline_template("<%= (${memorysize_mb} * 0.3).floor %>MB")
+	}
+	
+	ini_setting { "postgresql ini log_directory":
+		setting => "log_directory",
+		value => "'/var/log/pgsql'"
+	}
+	
+	ini_setting { "postgresql ini log_filename":
+		setting => "log_filename",
+		value => "'postgresql-%Y-%m-%d_%H%M%S.log'"
+	}
+	
+	ini_setting { "postgresql ini log_rotation_age":
+		setting => "log_rotation_age",
+		value => 0
+	}
+	
+	ini_setting { "postgresql ini log_rotation_size":
+		setting => "log_rotation_size",
+		value => "64MB"
+	}
+	
+	ini_setting { "postgresql ini log_error_verbosity":
+		setting => "log_error_verbosity",
+		value => "verbose"
+	}
+	
+	ini_setting { "postgresql ini log_hostname":
+		setting => "log_hostname",
+		value => "on"
+	}
+	
+	ini_setting { "postgresql ini log_line_prefix":
+		setting => "log_line_prefix",
+		value => "'%m - [%d] {%v} (%s) '"
+	}
+	
+	ini_setting { "postgresql ini track_io_timing":
+		setting => "track_io_timing",
+		value => "on"
+	}
+	
+	ini_setting { "postgresql ini track_functions":
+		setting => "track_functions",
+		value => "all"
+	}
+	
 	cron { "postgresql backup":
 		command => "cronic su - postgres -c \"/var/lib/pgsql/backup.sh\"",
 		hour => $hostname ? {
