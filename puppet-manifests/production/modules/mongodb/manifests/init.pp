@@ -11,4 +11,9 @@ class mongodb {
 		require => File["/etc/yum.repos.d/mongodb.repo"]
 	}
 	
+	service { "mongod":
+		ensure => running,
+		enable => true
+	}
+	
 }
