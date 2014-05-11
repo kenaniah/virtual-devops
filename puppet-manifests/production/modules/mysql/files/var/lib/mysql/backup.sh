@@ -109,7 +109,8 @@ function rsync_mysql_backups()
 {
 	
 	# Rsync backups to NAS server
-		
+	echo "Rsync is not configured"
+	
 }
 
 ##################################################

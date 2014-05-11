@@ -112,6 +112,7 @@ function rsync_postgres_backups()
 {
 	
 	# Rsync backups to NAS server
+	echo "Rsync is not configured"
 			
 }
 
