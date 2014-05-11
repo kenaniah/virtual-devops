@@ -186,12 +186,7 @@ class postgresql($major = '9', $minor = '3') {
 		setting => "checkpoint_completion_target",
 		value => 0.75
 	}
-	
-	ini_setting { "postgresql ini shared_buffers":
-		setting => "shared_buffers",
-		value => inline_template("<%= (${memorysize_mb} * 0.3).floor %>MB")
-	}
-	
+		
 	ini_setting { "postgresql ini log_directory":
 		setting => "log_directory",
 		value => "'/var/log/pgsql'"
