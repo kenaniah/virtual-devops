@@ -1,6 +1,6 @@
 class mysql {
 
-	$backup_path = "/var/lib/mysql-backups";
+	$backup_path = "/var/lib/mysql-backups"
 
 	File {
 		owner => "mysql",
