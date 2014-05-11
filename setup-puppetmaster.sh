@@ -57,6 +57,10 @@ if [ ! -d /etc/puppet/manifests ]; then
 	sudo -u puppet-dashboard rake RAILS_ENV=production cert:create_key_pair
 	sudo -u puppet-dashboard rake RAILS_ENV=production cert:request
 	sudo -u puppet-dashboard rake RAILS_ENV=production cert:retrieve
+		
+	# Add provided classes to the dashboard
+	sudo -u puppet-dashboard rake RAILS_ENV=production nodeclass:add name=postgresql
+		
 	cd -
 	
 fi
