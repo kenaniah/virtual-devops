@@ -62,6 +62,7 @@ if [ ! -d /etc/puppet/manifests ]; then
 	sudo -u puppet-dashboard rake RAILS_ENV=production nodeclass:add name=postgresql
 	sudo -u puppet-dashboard rake RAILS_ENV=production nodeclass:add name=php
 	sudo -u puppet-dashboard rake RAILS_ENV=production nodeclass:add name=mysql
+	sudo -u puppet-dashboard rake RAILS_ENV=production nodeclass:add name=mongodb
 		
 	cd -
 	
