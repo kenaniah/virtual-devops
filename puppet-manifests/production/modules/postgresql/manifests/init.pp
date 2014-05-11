@@ -10,7 +10,7 @@ class postgresql($major = '9', $minor = '3') {
 	$package = "pgdg-${os}${major}${minor}"
 	
 	# Ini file defaults
-	Ini_file {
+	Ini_setting {
 		ensure => present,
 		path => "/var/lib/pgsql/${major}.${minor}/data/postgresql.conf",
 		section => "",
@@ -142,22 +142,22 @@ class postgresql($major = '9', $minor = '3') {
 		require => [ Package[$postgres_server], Exec["init-db-${major}.${minor}"] ]
 	}
 	
-	ini_file { "postgresql ini listen_addresses":
+	ini_setting { "postgresql ini listen_addresses":
 		setting => "listen_addresses",
 		value => "*"
 	}
 	
-	ini_file { "postgresql ini port":
+	ini_setting { "postgresql ini port":
 		setting => "port",
 		value => "54${major}${minor}"
 	}
 	
-	ini_file { "postgresql ini listen_addresses":
+	ini_setting { "postgresql ini listen_addresses":
 		setting => "listen_addresses",
 		value => "*"
 	}
 	
-	ini_file { "postgresql ini shared_buffers":
+	ini_setting { "postgresql ini shared_buffers":
 		setting => "shared_buffers",
 		value => inline_template("<%= (${memorysize_mb} * 0.3).floor %>MB")
 	}
