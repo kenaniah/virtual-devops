@@ -64,6 +64,7 @@ class php {
 		"php-xml",
 		"php-zts"
 	  ]: 
+	  	require => [ Ini_setting["remi base"], Ini_setting["remi php 5.5"] ]
 	}
 	
 	package { "mod_suphp":
