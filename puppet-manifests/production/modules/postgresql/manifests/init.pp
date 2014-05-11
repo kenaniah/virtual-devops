@@ -134,8 +134,8 @@ class postgresql($major = '9', $minor = '3') {
 		require => [ Package[$postgres_server], Exec["init-db-${major}.${minor}"] ]
 	}
 	
-	cron { "postgresql ${major}.${minor} backup":
-		command => "cronic su - postgres -c \"/var/lib/pgsql/backup.sh ${major}.${minor}\"",
+	cron { "postgresql backup":
+		command => "cronic su - postgres -c \"/var/lib/pgsql/backup.sh\"",
 		hour => $hostname ? {
 			"dbdev" => 0,
 			"virt2" => 1,
