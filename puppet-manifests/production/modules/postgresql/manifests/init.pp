@@ -144,7 +144,7 @@ class postgresql($major = '9', $minor = '3') {
 	
 	ini_setting { "postgresql ini listen_addresses":
 		setting => "listen_addresses",
-		value => "*"
+		value => "'*'"
 	}
 	
 	ini_setting { "postgresql ini port":
