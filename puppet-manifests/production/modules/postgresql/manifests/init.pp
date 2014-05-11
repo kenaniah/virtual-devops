@@ -152,11 +152,6 @@ class postgresql($major = '9', $minor = '3') {
 		value => "54${major}${minor}"
 	}
 	
-	ini_setting { "postgresql ini listen_addresses":
-		setting => "listen_addresses",
-		value => "*"
-	}
-	
 	ini_setting { "postgresql ini shared_buffers":
 		setting => "shared_buffers",
 		value => inline_template("<%= (${memorysize_mb} * 0.3).floor %>MB")
