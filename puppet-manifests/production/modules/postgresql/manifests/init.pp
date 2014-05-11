@@ -156,6 +156,11 @@ class postgresql($major = '9', $minor = '3') {
 		value => "'*'"
 	}
 	
+	ini_setting { "postgresql ini max_connections":
+		setting => "max_connections",
+		value => 200
+	}
+	
 	ini_setting { "postgresql ini port":
 		setting => "port",
 		value => "54${major}${minor}"
