@@ -66,10 +66,21 @@ class php {
 	  ]: 
 	}
 	
-	/*
 	package { "mod_suphp":
-		require => Yumrepo["rpmforge"]
+		require => Exec["rpmforge yum repo"]
 	}
+	
+	ini_setting { "suphp ini umask":
+		ensure => present,
+		path => "/etc/suphp.conf",
+		section => "global",
+		setting => "umask",
+		value => "0022",
+		require => Package["mod_suphp"]
+	}
+	
+	/*
+	
 
 	file {
 		
