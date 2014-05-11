@@ -22,52 +22,34 @@ class php {
 	package { [
 		"gcc", 
 		"php",
-		"php-pdo",
-		"php-pgsql",
+		"php-common",
+		"php-cli",
+		"php-gd",
+		"php-intl",
+		# "php-magickwand",
+		"php-markdown",
+		"php-mbstring",
 		"php-mysqlnd",
-		"php-pecl-xdebug"
+		"php-pdo",
+		"php-pecl-gmagick",
+		# "php-pecl-imagick",
+		"php-pecl-memcached",
+		"php-pecl-mongo",
+		"php-pecl-oauth",
+		"php-pecl-xdebug",
+		"php-pgsql",
+		"php-swift-Swift",
+		"php-tidy",
+		"php-xml",
+		"php-zts"
 	  ]: 
 	}
-
+	
 	/*
-	#$php_version = "5.3.6"
-	package {
-		"gcc":			ensure => installed;
-		"php":			ensure => installed,
-						require => Yumrepo["remi"];
-		"php-cli":		ensure => installed,
-						require => Yumrepo["remi"];
-		"php-gd":		ensure => installed,
-						require => Yumrepo["remi"];
-		"php-pdo":		ensure => installed,
-						require => Yumrepo["remi"];
-		"php-pgsql":		ensure => installed,
-						require => Yumrepo["remi"];
-		"php-mysqlnd":		ensure => installed,
-						require => Yumrepo["remi"];
-		"php-bcmath":	ensure => installed,
-						require => Yumrepo["remi"];
-		"php-mcrypt":	ensure => installed,
-						require => Yumrepo["remi"];
-		"php-mbstring":	ensure => installed,
-						require => Yumrepo["remi"];
-		"php-xml":		ensure => installed,
-						require => Yumrepo["remi"];
-		"php-ldap":		ensure => installed,
-						require => Yumrepo["remi"];
-		"php-pecl-xdebug":	ensure => installed,
-						require => Yumrepo["remi"];
-		"php-pear-Spreadsheet-Excel-Writer":	
-						ensure => installed,
-						require => Yumrepo["remi"];
-		"php-swift-Swift":	ensure => installed,
-						require => Yumrepo["remi"];
-		"mod_suphp":	ensure => installed,
-						require	=> [
-								Yumrepo["rpmforge"],
-								Package["php"],
-								];
+	package { "mod_suphp":
+		require => Yumrepo["rpmforge"]
 	}
+
 	file {
 		
 		
