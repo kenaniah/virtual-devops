@@ -44,5 +44,14 @@ class mysql {
 			source => [ "puppet:///modules/mysql/var/lib/mysql/generate_slave_dump.sh" ],
 			mode => 1744;
 	}
+	
+	cron { "mysql backup":
+		command => "cronic su - mysql -c \"/var/lib/mysql/backup.sh ${backup_path}\"",
+		hour => $hostname ? {
+			default => "*"
+		},
+		minute => 0,
+		require => File["/var/lib/mysql/backup.sh"]
+	}
 
 }

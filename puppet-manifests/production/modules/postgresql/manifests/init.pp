@@ -162,8 +162,6 @@ class postgresql($major = '9', $minor = '3') {
 	cron { "postgresql backup":
 		command => "cronic su - postgres -c \"/var/lib/pgsql/backup.sh\"",
 		hour => $hostname ? {
-			"dbdev" => 0,
-			"virt2" => 1,
 			default => "*"
 		},
 		minute => 0,
