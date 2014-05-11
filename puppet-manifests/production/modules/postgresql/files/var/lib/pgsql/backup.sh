@@ -112,19 +112,7 @@ function rsync_postgres_backups()
 {
 	
 	# Rsync backups to NAS server
-	#echo "$(date '+%D %H:%M:%S') - Rsyncing to nas1"
-	#/usr/bin/rsync -rav --delete backups/ /net/nas1/nfs/postgres_databases/<%= hostname %>
-	
-	# Create symlinks for quick restores
-	#cd /net/nas1/nfs/postgres_databases/<%= hostname %>
-	
-	for db in $dbs
-	do
-		ln -s -f $db.$time.dump $db.dump
-	done
-	
-	cd -
-		
+			
 }
 
 ##################################################
