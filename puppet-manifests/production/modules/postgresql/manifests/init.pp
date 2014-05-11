@@ -46,7 +46,7 @@ class postgresql($major = '9', $minor = '3') {
 		subscribe => File["/var/lib/pgsql/${major}.${minor}/data/pg_hba.conf"]
 	}
 	
-	file { "/var/log/pgsql":
+	file { "/var/log/postgresql-${major}.${minor}":
 		ensure => directory,
 		owner => "postgres",
 		group => "postgres",
@@ -198,7 +198,7 @@ class postgresql($major = '9', $minor = '3') {
 		
 	ini_setting { "postgresql ini log_directory":
 		setting => "log_directory",
-		value => "'/var/log/pgsql'"
+		value => "'/var/log/postgresql-${major}.${minor}'"
 	}
 	
 	ini_setting { "postgresql ini log_filename":
