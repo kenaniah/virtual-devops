@@ -46,6 +46,15 @@ class postgresql($major = '9', $minor = '3') {
 		require => [ Package[$postgres_server], Exec["init-db-${major}.${minor}"] ]
 	}
 	
+	file { "/etc/sysconfig/pgsql/postgresql-${major}.${minor}":
+		ensure => file,
+		content => template("postgresql/sysconfig.erb"),
+		owner => "root",
+		group => "root",
+		mode => 0644,
+		require => [ Package[$postgres_server], Exec["init-db-${major}.${minor}"] ]
+	}
+	
 	file { "/var/lib/pgsql/${major}.${minor}/data/pg_hba.conf":
 		ensure => file,
 		source => [ "puppet:///modules/postgresql/var/lib/pgsql/data/pg_hba.conf" ],
