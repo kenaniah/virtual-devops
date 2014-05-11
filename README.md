@@ -6,6 +6,8 @@ To get rockin':
 curl -sS https://raw.githubusercontent.com/kenaniah/virtual-devops/master/perform-setup.sh | bash
 ```
 
+It's recommended that first run this on the puppet server, as it should be the first server provisioned. Not required, but you should probably name that host "puppet".
+
 How We Roll
 ----------------------
 We assume this is the *first* command you run when provisioning a new server from a bare-bones CentOS image.
