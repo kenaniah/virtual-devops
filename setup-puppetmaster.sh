@@ -60,6 +60,7 @@ if [ ! -d /etc/puppet/manifests ]; then
 		
 	# Add provided classes to the dashboard
 	sudo -u puppet-dashboard rake RAILS_ENV=production nodeclass:add name=postgresql
+	sudo -u puppet-dashboard rake RAILS_ENV=production nodeclass:add name=php
 		
 	cd -
 	
