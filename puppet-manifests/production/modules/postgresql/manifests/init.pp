@@ -11,7 +11,7 @@ class postgresql($major = '9', $minor = '3') {
 	
 	exec {
 		"install-pgdg-${major}${minor}":
-			command => "wget -nd -r -l 1 http://yum.postgresql.org/${major}.${minor}/${family}/rhel-${lsbmajdistrelease}-${hardwareisa}/ -A 'pgdg*${os}*' && ls -F pgdg-${os}* | head --lines=-1 | xargs rm ; rpm -ivh pgdg-${os}* && rm -f pgdg-${os}*;",
+			command => "wget -nd -r -l 1 http://yum.postgresql.org/${major}.${minor}/${family}/rhel-${operatingsystemmajrelease}-${hardwareisa}/ -A 'pgdg*${os}*' && ls -F pgdg-${os}* | head --lines=-1 | xargs rm ; rpm -ivh pgdg-${os}* && rm -f pgdg-${os}*;",
 			creates => "/etc/yum.repos.d/pgdg-${major}${minor}-${os}.repo"
 	}
 	

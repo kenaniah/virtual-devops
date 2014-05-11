@@ -7,6 +7,10 @@ filebucket { "main":
 	path => false
 }
 
+Exec {
+	path => $path
+}
+
 File {
 	backup => "main"
 }
