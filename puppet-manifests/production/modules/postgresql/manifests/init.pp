@@ -14,7 +14,8 @@ class postgresql($major = '9', $minor = '3') {
 		ensure => present,
 		path => "/var/lib/pgsql/${major}.${minor}/data/postgresql.conf",
 		section => "",
-		require => [ Package[$postgres_server], Exec["init-db-${major}.${minor}"] ]
+		require => [ Package[$postgres_server], Exec["init-db-${major}.${minor}"] ],
+		notify => Service["postgresql-${major}.${minor}"]
 	}
 	
 	exec {
