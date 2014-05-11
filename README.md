@@ -12,7 +12,17 @@ We assume this is the *first* command you run when provisioning a new server fro
 
 This git repository will be downloaded and installed in `/opt/virtual-devops`.
 
-If the host's IP matches the IP of the puppet server (`$PUPPET_IP` from `config.sh`), the puppet master will be installed and the environments directory symlinked to `/opt/virtual-devops/puppet-manifests`.
+An entry for `puppet` will be added to `/etc/hosts`.
+
+The puppet client in installed on all servers.
+
+If the host's IP matches the IP of the puppet server (`$PUPPET_IP` from `config.sh`), the puppet master will be installed.
+ * `/etc/puppet/environments` will be symlinked to `/opt/virtual-devops/puppet-manifests`
+ * The puppet dashboard will be installed
+    * Apache, MySQL, mod_passenger, and mod_ssl are installed as dependencies
+    * Apache will be configured to vhost the puppet dashboard via mod_passenger at `https://$PUPPET_IP:3000`
+    * MySQL's `max_allowed_packet` will be set to 32MB
+
 
 Caveats
 ----------------------
