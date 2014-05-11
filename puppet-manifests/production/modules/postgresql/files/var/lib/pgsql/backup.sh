@@ -4,17 +4,10 @@
 # DO NOT EDIT
 
 ##################################################
-# Usage
+# Usage: `basename $0` [<database>]...
 ##################################################
-if [ $# -eq 0 ]
-then
-	echo "Usage: `basename $0` [<database>]..."
-	exit 1
-fi
 
-##################################################
 # Variable Definitions
-##################################################
 VERSION=`psql --version | rev | cut -d " " -f1 | rev | awk -F \. {'print $1 "." $2'}`
 hour=$(date +%H)
 day=$(date +%d)
