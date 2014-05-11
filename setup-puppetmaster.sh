@@ -66,8 +66,9 @@ if [ ! -d /etc/puppet/manifests ]; then
 	
 fi
 
-# Update the manifest
-rsync -rav $SCRIPT_PATH/puppet-manifests/ /etc/puppet/environments
+# Symlink the puppet manifests
+rmdir /etc/puppet/manifests
+ln -s /opt/virtual-devops/puppet-manifests /etc/puppet/manifests
 
 # Set up the service
 puppet resource service puppetmaster ensure=stopped enable=false
