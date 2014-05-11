@@ -32,6 +32,12 @@ class php {
 		value => 1,
 		require => Exec["remi yum repo"]
 	}
+	
+	file { "/etc/php.d/custom.ini":
+		ensure => file,
+		source => [ "puppet:///modules/php/etc/php.d/custom.ini" ],
+		require => Package["php"]
+	}
 
 	package { [
 		"gcc",
