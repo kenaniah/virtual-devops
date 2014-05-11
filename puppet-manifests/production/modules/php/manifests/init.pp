@@ -79,40 +79,4 @@ class php {
 		require => Package["mod_suphp"]
 	}
 	
-	/*
-	
-
-	file {
-		
-		
-		"/etc/php.ini":
-		mode	=> 0644,
-		owner	=> root,
-		group	=> root,
-		content	=> template("php/php.ini.erb"),
-		require	=> Package["php"];
-	
-		"/etc/suphp.conf":
-		mode	=> 0644,
-		owner	=> root,
-		group	=> root,
-		source	=> [
-			"puppet:///modules/php/etc/suphp.conf.$hostname",
-			"puppet:///modules/php/etc/suphp.conf",
-		],
-		require	=> Package["mod_suphp"];
-		
-		"/etc/httpd/conf.d/suphp.conf":
-		mode	=> 0644,
-		owner	=> root,
-		group	=> root,
-		source	=> [
-			"puppet:///modules/php/etc/httpd/conf.d/suphp.conf.$hostname",
-			"puppet:///modules/php/etc/httpd/conf.d/suphp.conf",
-		],
-		require	=> Package["mod_suphp"];
-
-	} #file
-	
-	*/
 }
