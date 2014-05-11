@@ -46,6 +46,14 @@ class postgresql($major = '9', $minor = '3') {
 		subscribe => File["/var/lib/pgsql/${major}.${minor}/data/pg_hba.conf"]
 	}
 	
+	file { "/var/log/pgsql":
+		ensure => directory,
+		owner => "postgres",
+		group => "postgres",
+		mode => 0700,
+		require => [ Package[$postgres_server], Exec["init-db-${major}.${minor}"] ]
+	}
+	
 	file { "/etc/profile.d/postgresql.sh":
 		ensure => file,
 		content => template("postgresql/profile.sh.erb"),
