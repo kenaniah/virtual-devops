@@ -57,11 +57,9 @@ class php {
 						require => Yumrepo["remi"];
 		"php-pecl-xdebug":	ensure => installed,
 						require => Yumrepo["remi"];
-		/*
 		"php-pear-Spreadsheet-Excel-Writer":	
 						ensure => installed,
 						require => Yumrepo["remi"];
-		*/
 		"php-swift-Swift":	ensure => installed,
 						require => Yumrepo["remi"];
 		"mod_suphp":	ensure => installed,
