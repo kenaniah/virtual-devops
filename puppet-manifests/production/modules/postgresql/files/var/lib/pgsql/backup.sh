@@ -86,14 +86,18 @@ function rotate_postgres_backups()
 		then
 			# Copy the last backup to the monthly folder
 			cp backups/$db.$time.dump backups_monthly/
-			ln -s -f backups_monthly/$db.$time.dump backups_monthly/$db.dump
+			cd backups_monthly
+			ln -s -f $db.$time.dump $db.dump
+			cd -
 		fi
 		
 		if [ $hour -eq "00" -a $day -eq "01" ]
 		then
 			# Copy the last backup to the yearly folder
 			cp backups/$db.$time.dump backups_yearly/
-			ln -s -f backups_yearly/$db.$time.dump backups_yearly/$db.dump
+			cd backups_yearly
+			ln -s -f $db.$time.dump $db.dump
+			cd -
 		fi
 		
 	done
