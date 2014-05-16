@@ -90,14 +90,18 @@ function rotate_mysql_backups()
 		then
 			# Copy the last backup to the monthly folder
 			cp backups/$db.$time.sql.gz backups_monthly/
-			ln -s -f backups_monthly/$db.$time.sql.gz backups_monthly/$db.sql.gz
+			cd backups_monthly
+			ln -s -f $db.$time.sql.gz $db.sql.gz
+			cd -
 		fi
 		
 		if [ $hour -eq "00" -a $day -eq "01" ]
 		then
 			# Copy the last backup to the yearly folder
 			cp backups/$db.$time.sql.gz backups_yearly/
-			ln -s -f backups_yearly/$db.$time.sql.gz backups_yearly/$db.sql.gz
+			cd backups_yearly
+			ln -s -f $db.$time.sql.gz $db.sql.gz
+			cd -
 		fi
 		
 	done
