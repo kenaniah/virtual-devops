@@ -13,7 +13,8 @@ ifconfig | grep -q "$PUPPET_IP" || exit 1
 if [ ! -d /etc/puppet/manifests ]; then
 	
 	# Install packages (dashboard requires MySQL for its backend)
-	yum install puppet-server httpd mod_passenger mod_ssl puppet-dashboard mysql mysql-server -y
+	yum install puppet-server-3.4.3-1.el6 httpd mod_passenger mod_ssl puppet-dashboard mysql mysql-server -y
+	yum versionlock puppet-server
 	
 	# Set up the autosign file
 	test -f /etc/puppet/autosign.conf || echo "$PUPPET_AUTOSIGN" > /etc/puppet/autosign.conf

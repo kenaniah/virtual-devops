@@ -19,7 +19,8 @@ rpm -ihv http://mirror.steadfast.net/epel/6/x86_64/epel-release-6-8.noarch.rpm
 rpm -ihv http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
 
 # Install base packages
-yum install vim wget man htop bind-utils puppet mlocate -y
+yum install vim wget man htop bind-utils puppet-3.4.3-1.el6 mlocate yum-plugin-versionlock -y
+yum versionlock puppet
 
 # Point to the puppet host (if it doesn't already exist)
 grep -q "puppet" /etc/hosts || echo "$PUPPET_IP puppet" >> /etc/hosts
