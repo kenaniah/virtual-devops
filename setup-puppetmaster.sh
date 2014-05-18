@@ -80,5 +80,6 @@ service httpd restart
 puppet resource service puppet-dashboard-workers ensure=running enable=true
 
 # Update ourself
+puppet agent --test
 puppet resource ini_setting "mysqld max_allowed_packet" ensure=present path=/etc/my.cnf section=mysqld setting=max_allowed_packet value=32M
 service mysqld restart
