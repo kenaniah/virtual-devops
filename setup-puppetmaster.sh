@@ -70,6 +70,7 @@ if [ ! -d /etc/puppet/manifests ]; then
 fi
 
 # Symlink the puppet manifests
+rm -rf /etc/puppet/environments
 ln -s /opt/virtual-devops/puppet-manifests /etc/puppet/environments
 
 # Set up the service
