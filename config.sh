@@ -3,7 +3,7 @@
 # Defines config options used by other scripts
 
 # Static IP address of the puppet server (will be set in /etc/hosts)
-PUPPET_IP=192.241.234.84
+PUPPET_IP=162.243.103.156
 
 # Hosts that puppet will automatically sign certs for
 PUPPET_AUTOSIGN=*
