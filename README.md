@@ -6,7 +6,7 @@ To get rockin':
 curl -sS https://raw.githubusercontent.com/kenaniah/virtual-devops/master/perform-setup.sh | bash
 ```
 
-It's recommended that first run this on the puppet server, as it should be the first server provisioned. Not required, but you should probably name that host "puppet".
+It's recommended that first run this on the puppet server, as it should be the first server provisioned. The puppet server must have the hostname of "puppet".
 
 How We Roll
 ----------------------
@@ -30,5 +30,4 @@ Caveats
 ----------------------
 
  * The puppet server must have the hostname of `puppet`
- * The location of the puppet host is statically set in `/etc/hosts` based on `$PUPPET_IP`
  * Puppet dashboard setup uses `sudo`, which requires a tty to be present. If you are using ssh, a tty may be faked via `ssh -t`

@@ -23,7 +23,7 @@ yum install vim wget man htop puppet bind-utils mlocate yum-plugin-versionlock -
 #yum versionlock puppet facter
 
 # Point to the puppet host (if it doesn't already exist)
-grep -q "puppet" /etc/hosts || echo "$PUPPET_IP puppet" >> /etc/hosts
+# grep -q "puppet" /etc/hosts || echo "$PUPPET_IP puppet" >> /etc/hosts
 
 # Perform a full system update
 yum update -y
