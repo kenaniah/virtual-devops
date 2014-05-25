@@ -7,7 +7,7 @@ SCRIPT_PATH=$(dirname `which $0`)
 . $SCRIPT_PATH/config.sh
 
 # Don't do anything if we're not the puppetmaster
-test `hostname` = "puppet" || exit 1
+test `hostname` = "puppet" || return 1
 
 # Install the puppet server
 if [ ! -d /etc/puppet/manifests ]; then

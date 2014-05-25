@@ -36,7 +36,7 @@ rsync -v $SCRIPT_PATH/files/puppet.conf /etc/puppet/puppet.conf
 . $SCRIPT_PATH/setup-puppetmaster.sh
 
 # Perform the setup
-puppet agent --onetime --no-daemonize -v
+puppet agent --test --waitforcert 60
 
 # Start the puppet client service
 puppet resource service puppet ensure=running enable=true
