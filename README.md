@@ -30,5 +30,6 @@ Caveats
 ----------------------
 
  * The puppet server must have the hostname of `puppet`
- * The IP of the puppet server (`$PUPPET_IP` from `config.sh`) will be written to the hosts file 
+ * The IP of the puppet server (`$PUPPET_IP` from `config.sh`) will be written to the hosts file
+ * Servers aside from the puppet server will require manual signing of their certs for security (use `puppet cert sign <hostname>` on the puppetmaster)  
  * Puppet dashboard setup uses `sudo`, which requires a tty to be present. If you are using ssh, a tty may be faked via `ssh -t`
