@@ -81,5 +81,11 @@ puppet resource service puppet-dashboard-workers ensure=running enable=true
 
 # Update ourself
 puppet agent --test
+
+# Remove the autosign file
+rm -f /etc/puppet/autosign.conf
+service httpd restart
+
+# Modify mysql's settings
 puppet resource ini_setting "mysqld max_allowed_packet" ensure=present path=/etc/my.cnf section=mysqld setting=max_allowed_packet value=32M
 service mysqld restart
