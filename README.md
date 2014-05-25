@@ -18,7 +18,7 @@ An entry for `puppet` will be added to `/etc/hosts`.
 
 The puppet client in installed on all servers.
 
-If the host's IP matches the IP of the puppet server (`$PUPPET_IP` from `config.sh`), the puppet master will be installed.
+If the host's name is `puppet`, the puppet master will be installed.
  * `/etc/puppet/environments` will be symlinked to `/opt/virtual-devops/puppet-manifests`
  * The puppet dashboard will be installed
     * Apache, MySQL, mod_passenger, and mod_ssl are installed as dependencies
@@ -30,4 +30,5 @@ Caveats
 ----------------------
 
  * The puppet server must have the hostname of `puppet`
+ * The IP of the puppet server (`$PUPPET_IP` from `config.sh`) will be written to the hosts file 
  * Puppet dashboard setup uses `sudo`, which requires a tty to be present. If you are using ssh, a tty may be faked via `ssh -t`

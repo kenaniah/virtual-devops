@@ -2,6 +2,9 @@
 
 # Defines config options used by other scripts
 
+# IP address of the puppet server
+PUPPET_IP=192.241.176.239
+
 # Hosts that puppet will automatically sign certs for
 PUPPET_AUTOSIGN=*
 
