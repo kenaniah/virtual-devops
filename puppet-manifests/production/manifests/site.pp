@@ -10,3 +10,7 @@ Exec {
 File {
 	backup => "main"
 }
+
+class {'hosts':
+
+}
