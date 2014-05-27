@@ -13,6 +13,7 @@ rm /etc/localtime -f && ln -s /usr/share/zoneinfo/$TZ /etc/localtime
 
 # Install repositories
 rpm -ihv http://mirror.steadfast.net/epel/6/x86_64/epel-release-6-8.noarch.rpm
+rpm -ihv http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
 
 # Install base packages
 yum -y install vim wget man htop bind-utils mlocate yum-plugin-versionlock
