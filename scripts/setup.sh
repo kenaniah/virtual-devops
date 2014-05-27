@@ -4,9 +4,6 @@
 # is first provisioned. It will proceed to update pacakges and install the 
 # software config stack.
 
-SCRIPT_PATH=$(dirname `which $0`)
-. $SCRIPT_PATH/scripts/config.sh
-
 # Add cronic
 cp $SCRIPT_PATH/files/cronic /usr/bin/cronic
 chmod 777 /usr/bin/cronic
