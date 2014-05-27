@@ -14,3 +14,7 @@ File {
 class {'hosts':
 
 }
+
+Package {
+	allow_virtual => true
+}
