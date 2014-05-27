@@ -6,6 +6,8 @@ foreman-installer
 # Symlink the puppet manifests
 rm -rf /etc/puppet/environments
 ln -s /opt/virtual-devops/puppet-manifests /etc/puppet/environments
+rm -f /etc/puppet/manifests/site.pp
+ln -s /etc/puppet/environments/production/manifests/site.php /etc/puppet/manifests/site.pp
 
 # Import existing classes
 #foreman-rake puppet:import:puppet_classes
