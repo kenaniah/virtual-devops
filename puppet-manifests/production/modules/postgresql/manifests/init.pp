@@ -1,4 +1,4 @@
-class postgresql($major = '9', $minor = '3') {
+class postgresql($major = 9, $minor = 3, $shared_buffers = "500MB", $effective_cache_size = "1GB") {
 
 	$os = inline_template("<%= operatingsystem.downcase %>")
 	$family = inline_template("<%= osfamily.downcase %>")
@@ -111,7 +111,7 @@ class postgresql($major = '9', $minor = '3') {
 			value => "54${major}${minor}";
 		"postgresql ini shared_buffers":
 			setting => "shared_buffers",
-			value => inline_template("<%= (${memorysize_mb} * 0.3).floor %>MB");
+			value => "${shared_buffers}";
 		"postgresql ini work_mem":
 			setting => "work_mem",
 			value => "16MB";
@@ -120,7 +120,7 @@ class postgresql($major = '9', $minor = '3') {
 			value => "128MB";
 		"postgresql ini effective_cache_size":
 			setting => "effective_cache_size",
-			value => inline_template("<%= (${memorysize_mb} * 0.6).floor %>MB");
+			value => "${effective_cache_size}";
 		"postgresql ini default_statistics_target":
 			setting => "default_statistics_target",
 			value => 1000;
