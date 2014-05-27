@@ -16,7 +16,7 @@ test -n "$1" && git checkout "$1"
 chmod 744 scripts/*.sh
 
 # Load environment variables
-. $SCRIPT_PATH/config.sh
+. $SCRIPT_PATH/scripts/config.sh
 
 # Start the party
-. $SCRIPT_PATH/setup.sh
+. $SCRIPT_PATH/scripts/setup.sh
