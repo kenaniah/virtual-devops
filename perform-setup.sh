@@ -19,4 +19,4 @@ chmod 744 scripts/*.sh
 . $SCRIPT_PATH/scripts/config.sh
 
 # Start the party
-. $SCRIPT_PATH/scripts/setup.sh
+$SCRIPT_PATH/scripts/setup.sh
