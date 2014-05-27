@@ -10,7 +10,7 @@ git config core.filemode false
 test -n "$1" && git checkout "$1"
 
 # Set all shell scripts to executable
-chmod 744 *.sh
+chmod 744 scripts/*.sh
 
 # Start the party
-./setup.sh
+./scripts/setup.sh

@@ -5,7 +5,7 @@
 # software config stack.
 
 SCRIPT_PATH=$(dirname `which $0`)
-. $SCRIPT_PATH/config.sh
+. $SCRIPT_PATH/scripts/config.sh
 
 # Add cronic
 cp $SCRIPT_PATH/files/cronic /usr/bin/cronic
@@ -33,7 +33,7 @@ rsync -v $SCRIPT_PATH/files/auth.conf /etc/puppet/auth.conf
 rsync -v $SCRIPT_PATH/files/puppet.conf /etc/puppet/puppet.conf
 
 # Set up the puppet master (if our IPs match)
-. $SCRIPT_PATH/setup-puppetmaster.sh
+. $SCRIPT_PATH/scripts/puppetmaster.sh
 
 # Perform the setup
 puppet agent --test --waitforcert 60
