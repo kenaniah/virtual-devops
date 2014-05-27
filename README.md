@@ -20,7 +20,7 @@ The puppet client in installed on all servers.
 
 If the host's short name is `puppet`, the puppet master will be installed.
  * `/etc/puppet/environments` will be symlinked to `/opt/virtual-devops/puppet-manifests`
- * Foreman will be installed
+ * [Foreman](http://theforeman.org/learn_more.html) will be installed
 
 Caveats
 ----------------------
