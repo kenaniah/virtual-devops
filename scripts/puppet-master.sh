@@ -17,3 +17,12 @@ ln -s /etc/puppet/environments/production/manifests/site.pp /etc/puppet/manifest
 # Import existing classes
 foreman-rake puppet:import:puppet_classes[batch]
 #foreman-rake puppet:rdoc:generate
+
+# Install puppetdb
+rm -rf $SCRIPT_PATH/puppet-manifests/production/modules/*
+puppet module install puppetlabs-puppetdb
+puppet apply -e "include puppetdb"
+cd $SCRIPT_PATH
+git add .
+git reset --hard HEAD
+cd -
