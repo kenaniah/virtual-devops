@@ -4,3 +4,6 @@ rsync -v $SCRIPT_PATH/files/puppet.conf /etc/puppet/puppet.conf
 
 # Perform a puppet run
 puppet agent --test
+
+# Start the puppet client service
+puppet resource service puppet ensure=running enable=true

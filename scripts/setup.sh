@@ -21,11 +21,11 @@ yum -y install vim wget man htop bind-utils mlocate yum-plugin-versionlock puppe
 # Determine if we are a puppet master or client
 if [ `hostname -s` = "puppet" ]; then
 	# Point to the puppet host (if it doesn't already exist)
-	grep -q "puppet" /etc/hosts || echo "127.0.0.1 puppet.$DOMAIN puppet" >> /etc/hosts
+	grep -q "puppet" /etc/hosts || echo "127.0.0.1 puppet" >> /etc/hosts
 	. $SCRIPT_PATH/scripts/puppet-master.sh
 else
 	# Point to the puppet host (if it doesn't already exist)
-	grep -q "puppet" /etc/hosts || echo "$PUPPET_IP puppet.$DOMAIN puppet" >> /etc/hosts
+	grep -q "puppet" /etc/hosts || echo "$PUPPET_IP puppet" >> /etc/hosts
 	# Point to self as well
 	grep -q `hostname` /etc/hosts || echo "127.0.0.1 `hostname` `hostname -s`" >> /etc/hosts
 fi
@@ -35,15 +35,3 @@ fi
 
 # Perform a full system update
 yum -y update
-
-# Copy over the puppet config files
-#rsync -v $SCRIPT_PATH/files/puppet.conf /etc/puppet/puppet.conf
-
-# Set up the puppet master (if our IPs match)
-#. $SCRIPT_PATH/scripts/puppetmaster.sh
-
-# Perform the setup
-#puppet agent --test --waitforcert 60
-
-# Start the puppet client service
-#puppet resource service puppet ensure=running enable=true
