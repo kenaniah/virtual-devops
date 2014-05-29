@@ -1,5 +1,6 @@
 # Set the script path
 SCRIPT_PATH=/opt/virtual-devops
+export SCRIPT_PATH
 
 # Clone the base repo
 yum install git -y && git clone https://github.com/kenaniah/virtual-devops.git $SCRIPT_PATH
