@@ -13,8 +13,8 @@ class hosts {
 	}
 		
 	# Publish my host definition for external nodes
-	@@host { $::fqdn:
-		name => "${::fqdn}-external",
+	@@host { "${::fqdn} external":
+		name => $::fqdn,
 		ip	=> $hosts::ip,
 		host_aliases => $hosts::host_aliases,
 		tag => $host_tag
