@@ -16,4 +16,4 @@ Package {
 }
 
 # Hostfile management
-include hosts
+class {'hosts': }
