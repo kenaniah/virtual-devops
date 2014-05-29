@@ -3,7 +3,7 @@ DevOps Kickstarter
 To get rockin':
 
 ```bash
-curl -sS https://raw.githubusercontent.com/kenaniah/virtual-devops/master/perform-setup.sh | bash
+curl -sS https://raw.githubusercontent.com/kenaniah/virtual-devops/master/perform-setup.sh | bash -i
 ```
 
 It's recommended that first run this on the puppet server, as it should be the first server provisioned. The puppet server must have a short hostname of "puppet".
