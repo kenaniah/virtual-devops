@@ -16,4 +16,4 @@ Package {
 }
 
 # Use the internal IP address to refer to other hosts
-include hosts
+class {'hosts': }
