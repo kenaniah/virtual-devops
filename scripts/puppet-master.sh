@@ -6,7 +6,7 @@ service puppetmaster stop
 # Install the foreman installer
 yum -y install http://yum.theforeman.org/releases/1.5/el6/x86_64/foreman-release.rpm
 yum -y install foreman-installer
-foreman-installer
+foreman-installer --enable-foreman-plugin-puppetdb
 
 # Symlink the puppet manifests
 rm -rf /etc/puppet/environments
