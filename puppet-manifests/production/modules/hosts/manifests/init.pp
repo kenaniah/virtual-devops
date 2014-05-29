@@ -22,4 +22,9 @@ class hosts {
 		ensure => present
 	}
 	
+	# Purge other host definitions
+	resources {'host':
+		purge => true
+	}
+	
 }
