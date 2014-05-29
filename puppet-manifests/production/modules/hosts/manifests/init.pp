@@ -27,8 +27,9 @@ class hosts {
 	
 	# Set up the localhost
 	host {'localhost':
-		name => "${::fqdn} localhost localhost.localdomain",
+		name => $::host,
 		ip => '127.0.0.1',
+		host_aliases => [ $::fqdn, 'localhost', 'localhost.localdomain' ],
 		tag => 'Included'
 	}
 	
