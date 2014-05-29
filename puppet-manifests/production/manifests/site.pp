@@ -15,5 +15,7 @@ Package {
 	allow_virtual => true
 }
 
-# Hostfile management
-class {'hosts': }
+# Use the internal IP address to refer to other hosts
+class {'hosts':
+	ip => $::ipaddress_eth1 
+}

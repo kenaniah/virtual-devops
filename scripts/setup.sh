@@ -26,6 +26,8 @@ if [ `hostname -s` = "puppet" ]; then
 else
 	# Point to the puppet host (if it doesn't already exist)
 	grep -q "puppet" /etc/hosts || echo "$PUPPET_IP puppet.$DOMAIN puppet" >> /etc/hosts
+	# Point to self as well
+	grep -q `hostname` /etc/hosts || echo "127.0.0.1 `hostname` `hostname -s`" >> /etc/hosts
 fi
 
 # Configure puppet clients

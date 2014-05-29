@@ -11,12 +11,7 @@ class hosts {
 		true => 'Excluded',
 		default => 'Included'
 	}
-	
-	@@notify{ $::fqdn:
-	}
-	
-	Notify <<| |>>
-	
+		
 	@@host { $::fqdn:
 		ip	=> $hosts::ip,
 		host_aliases => $hosts::host_aliases,
