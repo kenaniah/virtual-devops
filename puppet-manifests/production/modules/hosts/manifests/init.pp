@@ -14,6 +14,7 @@ class hosts {
 		
 	# Publish my host definition for external nodes
 	@@host { $::fqdn:
+		name => "${::fqdn}-external"
 		ip	=> $hosts::ip,
 		host_aliases => $hosts::host_aliases,
 		tag => $host_tag
@@ -24,6 +25,13 @@ class hosts {
 		ensure => present
 	} 
 	
+	# Set up the localhost
+	host {'localhost':
+		name => $::fqdn,
+		ip => '127.0.0.1',
+		host_aliases => [ 'localhost', 'localhost.localdomain' ],
+		tag => 'Included'
+	}
 	
 	# Purge other host definitions
 	resources {'host':
