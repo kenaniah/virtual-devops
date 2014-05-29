@@ -19,6 +19,14 @@ foreman-rake puppet:import:puppet_classes[batch]
 #foreman-rake puppet:rdoc:generate
 
 # Install puppetdb
+yum -y install puppetdb-terminus
+
+# Write the puppetdb config file
+echo -e "[main]\nserver = puppet\nport = 8081\n" > /etc/puppet/puppetdb.conf
+
+# Write the routes file
+cp $SCRIPT_PATH/files/routes.yaml /etc/puppet/
+
 #rm -rf $SCRIPT_PATH/puppet-manifests/production/modules/*
 #puppet module install puppetlabs-puppetdb
 #puppet apply -e "include puppetdb"
