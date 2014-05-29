@@ -12,14 +12,24 @@ class hosts {
 		default => 'Included'
 	}
 		
+	# Publish my host definition for external nodes
 	@@host { $::fqdn:
 		ip	=> $hosts::ip,
 		host_aliases => $hosts::host_aliases,
 		tag => $host_tag
 	}
 	
+	# Collect external host definitions
 	Host <<| tag == "Included" |>> {
-		ensure => present
+		ensure => present,
+		require => Host['localhost']
+	}
+	
+	# Set up the localhost
+	host {'localhost':
+		ip => '127.0.0.1',
+		host_aliases => [ $::fqdn, $::hostname ],
+		tag => 'Included'
 	}
 	
 	# Purge other host definitions
