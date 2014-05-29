@@ -5,7 +5,7 @@ class hosts {
 	
 	$ignore = false
 	$ip = $::ipaddress_eth1
-	$host_aliases = [ $::hostname ]
+	$host_aliases = [ $::fqdn ]
 	
 	$host_tag = $hosts::ignore ? {
 		true => 'Excluded',
@@ -13,8 +13,7 @@ class hosts {
 	}
 		
 	# Publish my host definition for external nodes
-	@@host { "${::fqdn} external":
-		name => $::fqdn,
+	@@host { $::hostname:
 		ip	=> $hosts::ip,
 		host_aliases => $hosts::host_aliases,
 		tag => $host_tag
@@ -26,9 +25,9 @@ class hosts {
 	} 
 	
 	# Set up the localhost
-	host {$::host:
+	host { $::fqdn:
 		ip => '127.0.0.1',
-		host_aliases => [ $::fqdn, 'localhost', 'localhost.localdomain' ],
+		host_aliases => [ $::hostname, 'localhost', 'localhost.localdomain' ],
 		tag => 'Included'
 	}
 	
