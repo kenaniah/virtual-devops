@@ -3,9 +3,9 @@
 # (Servers may be excluded by setting the ignore attribute)
 class hosts {
 	
-	$ignore = false
-	$ip = $::ipaddress
-	$host_aliases = [ $::hostname ]
+	$hosts::ignore = false
+	$hosts::ip = $::ipaddress
+	$hosts::host_aliases = [ $::hostname ]
 	
 	$host_tag = $hosts::ignore ? {
 		true => 'Excluded',
