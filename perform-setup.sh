@@ -1,5 +1,5 @@
 # Set the script path
-SCRIPT_PATH=$(dirname `which $0`)
+SCRIPT_PATH=/opt/virtual-devops
 
 # Load environment variables
 . $SCRIPT_PATH/scripts/config.sh
