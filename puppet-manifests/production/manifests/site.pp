@@ -11,10 +11,9 @@ File {
 	backup => "main"
 }
 
-class {'hosts':
-
-}
-
 Package {
 	allow_virtual => true
 }
+
+# Hostfile management
+include hosts
