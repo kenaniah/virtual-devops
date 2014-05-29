@@ -20,7 +20,7 @@ class hosts {
 	}
 	
 	# Collect external host definitions
-	Host <<| tag == "Included" |>> {
+	Host <<| tag == "Included" and name != $::fqdn |>> {
 		ensure => present,
 		require => Host['localhost']
 	}
