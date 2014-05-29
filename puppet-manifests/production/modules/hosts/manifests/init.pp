@@ -20,9 +20,8 @@ class hosts {
 	}
 	
 	# Collect external host definitions
-	Host <<| tag == "Included" and name != $::fqdn |>> {
-		ensure => present,
-		require => Host['localhost']
+	Host <<| tag == "Included" |>> {
+		ensure => present
 	}
 	
 	# Set up the localhost
@@ -30,7 +29,8 @@ class hosts {
 		name => $::fqdn,
 		ip => '127.0.0.1',
 		host_aliases => [ $::hostname, 'localhost', 'localhost.localdomain' ],
-		tag => 'Included'
+		tag => 'Included',
+		require => Host <<| tag == "Included" |>>
 	}
 	
 	# Purge other host definitions
