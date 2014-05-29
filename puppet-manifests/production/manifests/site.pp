@@ -16,6 +16,4 @@ Package {
 }
 
 # Use the internal IP address to refer to other hosts
-class {'hosts':
-	ip => $::ipaddress_eth1 
-}
+include hosts
